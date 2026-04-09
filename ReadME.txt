@@ -10,7 +10,8 @@ https://www.youtube.com/watch?v=vu2NK5REvWM&t=11s
 ## after we demo we have someone edit / update the repo, and pull it
 ## proof it not all smoke and mirrros
 
-git clone https://github.com/Duru-E/<REPONAME>.git
+
+git clone https://github.com/Duru-E/DevOps-Demo.git
 sleep 5
 git pull
 sleep 5
@@ -20,7 +21,7 @@ docker build -t nginxdemo --no-cache .
 ## find that fresly minted image
 docker images 
 
-## run that shit
+## run that shit 
 docker run -d -p 80:80 --name nginxdemo nginxdemo
 
 ## Look at it running in all its glory
@@ -28,6 +29,12 @@ docker ps
 
 ## now view the eye candy
 http://127.0.0.1/
+
+## save it   (Drewe fix the path)
+docker save nginxdemo -o /mnt/share/nginxdemo.tar
+
+## (h for human ~25MB i think)
+ls -lh /mnt/share/nginxdemo.tar     
 
 ## had enough? shut it down
 docker stop nginxdemo
@@ -37,13 +44,6 @@ docker rm nginxdemo
 
 ## What the f is actually going on?
 docker rm nginxdemo
-
-## save it   (Drewe fix the path)
-docker save nginxdemo -o /mnt/share/nginxdemo.tar
-
-## (h for human ~25MB i think)
-ls -lh /mnt/share/nginxdemo.tar     
-
 
 ##########
 ## once we prove this process we save it to a new file called
@@ -71,9 +71,7 @@ ls -lh /mnt/share/nginxdemo.tar
 ## yes i use lots of non powershell commands im old,
 ## i lost the last version and this works and you can learn on your own time
 
-
 Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-
 
 ## drewe fill in the samba credientials and real share path
 net use o: \\192.168.2.254\testing /user:sambauser sambapass  (net use o: /delete if you done fucked up)
@@ -85,7 +83,6 @@ timeout /t 60
 ## also is the docker engine done loading? how would i know, i didnt run ' Get-Process '  
 ## im lazy and asumed your computer could do it in 60 seconds or less
 
-
 docker load -i o:\nginxdemo.tar
 
 ## use docker run -d -p 127.0.0.1:8123:80 if you are feelying cheeky
@@ -96,7 +93,6 @@ timeout /t 60
 ## but we also need to draw this out and talk some shit about devops
 
 Start-Process "http://127.0.0.1/"
-
 
 ## some cleanup
 docker stop nginxdemo
