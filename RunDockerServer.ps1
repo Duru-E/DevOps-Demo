@@ -1,3 +1,17 @@
+function loadingAnimation() {
+    param(
+        [int]$numAnimations
+    )
+
+    for ($i = 0; $i -lt $numAnimations; $i++){
+    for ($j = 0; $j -lt 3; $j++){
+        Write-Host "." -NoNewline
+        Start-Sleep -Seconds 1
+    }
+    Write-Host "`r   `r" -NoNewline
+}
+}
+
 #Variables
 $Fail = $false
 
@@ -17,14 +31,14 @@ if (!$Fail){
 
     #access build server file share
     net use o: \\192.168.2.254\Storage /user:smbuser smb
-    timeout /t 60
+    loadingAnimation(20)
 
     #load docker image and run web server
-    Write-Host "loading docker image"
+    Write-Host "Download docker image"
     docker load -i o:\nginxdemo.tar
     Write-Host "Starting webserver container"
     docker run -d -p 80:80 --name nginxdemo nginxdemo
-    timeout /t 60
+    loadingAnimation(20)
 
     #open webserver in browser
     Write-Host "Opening webserver in browser"
@@ -38,5 +52,6 @@ if (!$Fail){
     Write-Host "Stopping webserver and removing container"
     docker stop nginxdemo
     docker rm -f nginxdemo
-    docker image rm nginxdemo 
+    docker image rm nginxdemo
     }
+
