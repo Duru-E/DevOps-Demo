@@ -31,14 +31,14 @@ if (!$Fail){
 
     #access build server file share
     net use o: \\192.168.2.254\Storage /user:smbuser smb
-    loadingAnimation(20)
+    loadingAnimation(10)
 
     #load docker image and run web server
     Write-Host "Download docker image"
     docker load -i o:\nginxdemo.tar
     Write-Host "Starting webserver container"
     docker run -d -p 80:80 --name nginxdemo nginxdemo
-    loadingAnimation(20)
+    loadingAnimation(10)
 
     #open webserver in browser
     Write-Host "Opening webserver in browser"
