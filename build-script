@@ -3,6 +3,7 @@ rm /tmp/DevOps-Demo/ -rf
 cd /tmp/
 git clone https://github.com/Duru-E/DevOps-Demo.git
 sleep 3
+git config --global --add safe.directory /tmp/devops/DevOps-Demo
 cd DevOps-Demo/
 git pull
 sleep 3
