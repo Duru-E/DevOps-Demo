@@ -1,4 +1,3 @@
-su -
 rm /tmp/DevOps-Demo/ -rf
 cd /tmp/
 git clone https://github.com/Duru-E/DevOps-Demo.git
