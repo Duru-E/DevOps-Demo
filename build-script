@@ -1,4 +1,4 @@
-rm /tmp/devops/DevOps-Demo/ -rf
+rm /tmp/DevOps-Demo/ -rf
 cd /tmp/
 git clone https://github.com/Duru-E/DevOps-Demo.git
 sleep 3
