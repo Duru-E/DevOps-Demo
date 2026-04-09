@@ -10,13 +10,26 @@ https://www.youtube.com/watch?v=vu2NK5REvWM&t=11s
 ## after we demo we have someone edit / update the repo, and pull it
 ## proof it not all smoke and mirrros
 
+## BUILD SECTION
 
+su -
+
+cd /tmp/
 git clone https://github.com/Duru-E/DevOps-Demo.git
 sleep 5
+cd DevOps-Demo/
 git pull
 sleep 5
 
 docker build -t nginxdemo --no-cache .
+
+## save it   (Drewe fix the path)
+docker save nginxdemo -o /mnt/share/nginxdemo.tar
+
+## (h for human ~25MB i think)
+ls -lh /mnt/share/nginxdemo.tar     
+
+## END
 
 ## find that fresly minted image
 docker images 
@@ -29,12 +42,6 @@ docker ps
 
 ## now view the eye candy
 http://127.0.0.1/
-
-## save it   (Drewe fix the path)
-docker save nginxdemo -o /mnt/share/nginxdemo.tar
-
-## (h for human ~25MB i think)
-ls -lh /mnt/share/nginxdemo.tar     
 
 ## had enough? shut it down
 docker stop nginxdemo
@@ -74,7 +81,7 @@ docker rm nginxdemo
 Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 
 ## drewe fill in the samba credientials and real share path
-net use o: \\192.168.2.254\testing /user:sambauser sambapass  (net use o: /delete if you done fucked up)
+net use o: \\192.168.2.254\Storage /user:smbuser smb  (net use o: /delete if you done fucked up)
 timeout /t 60
 
 ## if your cool (katie) you write a validation that the file transfer is done being coppied
