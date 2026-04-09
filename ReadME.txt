@@ -75,30 +75,21 @@ docker rm nginxdemo
 ---------------------------------------------------------
 
 ## Host the container and serve the world (or class room)
-## yes i use lots of non powershell commands im old,
-## i lost the last version and this works and you can learn on your own time
 
+#start docker
 Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 
-## drewe fill in the samba credientials and real share path
+## samba credientials and real share path
+#access build server file share
 net use o: \\192.168.2.254\Storage /user:smbuser smb  (net use o: /delete if you done fucked up)
 timeout /t 60
 
-## if your cool (katie) you write a validation that the file transfer is done being coppied
-## how do i do that?  you look at the last modified time and make sure its 10+ seconds from being messed with
-## or do it another way i dont care I used a timeout with no validation
-## also is the docker engine done loading? how would i know, i didnt run ' Get-Process '  
-## im lazy and asumed your computer could do it in 60 seconds or less
-
+#load and run web server
 docker load -i o:\nginxdemo.tar
-
-## use docker run -d -p 127.0.0.1:8123:80 if you are feelying cheeky
 docker run -d -p 80:80 --name nginxdemo nginxdemo
 timeout /t 60
 
-## once again, cool kids will use a validation i used a timeout 10 seconds should be plenty....
-## but we also need to draw this out and talk some shit about devops
-
+#open webserver in browser
 Start-Process "http://127.0.0.1/"
 
 ## some cleanup
