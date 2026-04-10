@@ -1,14 +1,8 @@
-## Build the shit! 
-## This is mostly build server section, 
-## but fuck me and my cant save shit, its even more of a mess today
-https://www.youtube.com/watch?v=vu2NK5REvWM&t=11s
+## Devops has been explained with cryons ELI5 : Devops
+
+This readme
 
 
-####   help with <REPONAME>
-## we just need to pull the www folder.
-## this step is the magic aka "The Prestige"   
-## after we demo we have someone edit / update the repo, and pull it
-## proof it not all smoke and mirrros
 
 ## BUILD SECTION
 
@@ -115,4 +109,4 @@ once git syncs we pull it all back down, build it again
 The wow the shit out of them with the message they wrote without us seing it
 100% proof this is not fake
 
-Devops has been explained with cryons ELI5 : Devops
+
