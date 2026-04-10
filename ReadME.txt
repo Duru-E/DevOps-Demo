@@ -1,112 +1,20 @@
 ## Devops has been explained with cryons ELI5 : Devops
 
-This readme
+We have created a simple webpage and we want to host it on a webserver. We have chosen nginx as our webserver and we want to run it in a container. We will use docker to create a container image that will host our webpage. We will then run this container on our demo laptops.
+We have created a dockerfile that will build our container image. The dockerfile will download nginx running on alpine linux, delete the default website, copy our webpage to the container and build the docker image. We will then save this docker image to a tarball and share it on our network. The demo laptops will then load this docker image and run it as a container.
 
+
+## Our Setup
+We have a router and laptop setup allowing us to have a local network while still having internet access.
+We have a build server that will build our docker image and share it on the network.
+We have demo laptops that will access the shared docker image, load it and run it as a container.
 
 
 ## BUILD SECTION
-
-su -
-
-cd /tmp/
-git clone https://github.com/Duru-E/DevOps-Demo.git
-sleep 5
-cd DevOps-Demo/
-git pull
-sleep 5
-
-docker build -t nginxdemo --no-cache .
-
-## save it   (Drewe fix the path)
-docker save nginxdemo -o /mnt/share/nginxdemo.tar
-
-## (h for human ~25MB i think)
-ls -lh /mnt/share/nginxdemo.tar     
-
-## END
-
-## find that fresly minted image
-docker images 
-
-## run that shit 
-docker run -d -p 80:80 --name nginxdemo nginxdemo
-
-## Look at it running in all its glory
-docker ps
-
-## now view the eye candy
-http://127.0.0.1/
-
-## had enough? shut it down
-docker stop nginxdemo
-
-## good by crule world that container with a bang
-docker rm nginxdemo
-
-## What the f is actually going on?
-docker rm nginxdemo
-
-##########
-## once we prove this process we save it to a new file called
-<Script_Name>.sh
-## to run
-.\<Script_Name>.sh
-#####################
-
-----------------------------------------------------------
----		final outcome   
-
----		docker reads dockerfile
----		downloads nginx running on alpine linux
----		deletes the default website
----		copys my sweet ass webpage you all love
----		builds docker IMG
----		saves docker IMG to tarball
----
----		This is the single source of truth
----		All server that will host a container will use this IMG
----		the Demo Laptop (2 if we can get more) will fire up a container based on this img
----------------------------------------------------------
-
-## Host the container and serve the world (or class room)
-
-#start docker
-Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-
-## samba credientials and real share path
-#access build server file share
-net use o: \\192.168.2.254\Storage /user:smbuser smb  (net use o: /delete if you done fucked up)
-timeout /t 60
-
-#load and run web server
-docker load -i o:\nginxdemo.tar
-docker run -d -p 80:80 --name nginxdemo nginxdemo
-timeout /t 60
-
-#open webserver in browser
-Start-Process "http://127.0.0.1/"
-
-## some cleanup
-docker stop nginxdemo
-docker rm -f nginxdemo
-docker image rm nginxdemo 
-
-#####################################################
+We have created a build-script file that we run on our build server after each merge to main.
+This script will pull the latest changes from the repository, build the docker image and save it to a tarball on a network share.
 
 
-cool demo works (or i cry) we explained devops almost
-Now we do it all again a second time
-
-We pull an audience memeber from the crowd
-or two even
-
-either on git hub directly or on another laptop via CLI
-We have them update the index.html
-
-Push to git, merge you know the drill
-
-once git syncs we pull it all back down, build it again
-The wow the shit out of them with the message they wrote without us seing it
-100% proof this is not fake
-
-
+## Host the container
+We have created a RunDockerScript that runs Docker, loads the docker image from the tarball and runs it as a container.
+We will run this script on our demo laptops to host the webpage on nginx. We can then access the webpage from our browser.
