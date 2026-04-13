@@ -1,11 +1,15 @@
 rm /tmp/DevOps-Demo/ -rf
+rm /mnt/share/* -rf
+clear
+echo ls -lha /mnt/share
+ls -lha /mnt/share
+read -p "Press enter to continue."
 cd /tmp/
 git clone https://github.com/Duru-E/DevOps-Demo.git
-sleep 3
 git config --global --add safe.directory /tmp/DevOps-Demo
 cd DevOps-Demo/
 git pull
-sleep 3
 docker build -t nginxdemo --no-cache .
 docker save nginxdemo -o /mnt/share/nginxdemo.tar
-ls -lh /mnt/share/nginxdemo.tar
+echo ls -lha /mnt/share
+ls -lh /mnt/share/
